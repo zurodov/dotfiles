@@ -1,0 +1,97 @@
+# xfce
+#
+mkdir /mnt/tmp
+mount /dev/sda3 /mnt/tmp
+mount -t proc none /mnt/tmp/proc && mount -o bind /dev /mnt/tmp/dev && mount -o bind /sys /mnt/tmp/sys
+chroot /mnt/tmp
+env-update && source /etc/profile
+
+eselect profile set 21
+eselect fontconfig enable {1..40}
+emerge -pv calculate-templates
+
+rc-update add openvpn default
+
+emerge apcupsd
+rc-update add apcupsd.powerfail shutdown
+rc-update add apcupsd default
+emerge -vp dev-java/sun-jdk
+
+# ruby on rails install
+###emerge -v dev-ruby/rubygems
+###sudo gem install rhc
+###rhc domain show
+
+emerge -v dev-libs/libyaml
+
+curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --ruby --rails --autolibs=3
+
+gem install rdoc
+#gem install rails
+gem install execjs
+gem install therubyracer
+gem install rhc
+
+/usr/NX/bin/nxserver --useradd username
+
+emerge app-emulation/virtualbox-extpack-oracle -vbk
+emerge app-emulation/virtualbox-guest-additions -vbk
+/etc/init.d/virtualbox-guest-additions start
+rc-update add virtualbox-guest-additions default
+#modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
+mount -t vboxsf <shared_folder_name> <mount_point>
+
+emerge --autounmask-write =sci-geosciences/googleearth-6.0.3.2197
+emerge --autounmask-write =sci-geosciences/googleearth-7.1.1.1871
+dispatch-conf
+emerge -vbk sci-geosciences/googleearth
+
+emerge --autounmask-write =media-gfx/rawtherapee-4.0.11
+dispatch-conf
+emerge -vbk media-gfx/rawtherapee
+
+sensors-detect
+sensors
+/etc/init.d/lm_sensors start
+rc-update add lm_sensors default
+
+emerge -v noip-updater
+/etc/init.d/noip start
+rc-update add noip default
+
+emerge -avuDNp world
+
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
+#git clone git://github.com/astrails/dotvim.git
+#ln -sfn dotvim .vim
+#ln -sfn dotvim/vimrc .vimrc
+#cd .vim; make install
+
+### VIM + Vorax IDE install
+emerge -vp dev-lang/ruby
+eselect ruby set ruby19
+echo "app-editors/vim ruby" >> /etc/portage/package.use/vim_vorax
+eselect bashcomp enable rake
+emerge -vp dev-db/oracle-instantclient-sqlplus
+
+su - username   ###
+env|grep TNS_ADMIN
+ruby -v
+gem list
+gem install antlr3 -r
+gem install activesupport -r
+gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib64/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib64/ -r
+gem install vorax -r
+
+su -       ###
+emerge -vp app-editors/vim
+emerge -vp app-vim/l9
+
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+emerge --autounmask-write =www-apps/swish-e-2.4.7
+emerge -vp www-apps/swish-e
+http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
+
+cl-core-setup --pkg-name=mc
