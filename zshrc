@@ -39,7 +39,9 @@ DISABLE_CORRECTION="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git ruby rails3 screen)
+plugins=(git ruby gem rails3 screen)
+
+source $HOME/.alias
 
 source $ZSH/oh-my-zsh.sh
 
