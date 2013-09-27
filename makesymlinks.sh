@@ -7,9 +7,8 @@
 ########## Variables
 
 dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-#files="bashrc vimrc vim zshrc oh-my-zsh"    # list of files/folders to symlink in homedir
-files="vimrc"    # list of files/folders to symlink in homedir
+olddir=~/dotfiles/old             # old dotfiles backup directory
+files="alias vimrc zshrc Xresources"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -26,8 +25,28 @@ echo "...done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
+    mv ~/.$file ~/dotfiles/old/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+function install_zsh {
+# Test to see if zshell is installed.  If it is:
+if [ -f /bin/zsh ]; then
+	# Install oh-my-zsh from GitHub only if it isn't already present
+        if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
+	   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+	fi
+	# Set the default shell to zsh if it isn't currently set to zsh
+	if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
+	   chsh -s $(which zsh)
+	fi
+else
+        # If zsh isn't installed, emerge it
+        sudo -i emerge zsh-completion
+        install_zsh
+fi
+}
+
+install_zsh
 
