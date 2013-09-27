@@ -1,0 +1,7 @@
+
+alias cath="cat /etc/hosts"
+alias vicfg="vim ~/vimrc"
+alias vih="sudo vim /etc/hosts"
+alias naf="sudo pppd call nafta"
+alias df="df -h"
+
