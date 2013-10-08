@@ -133,6 +133,12 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 
+" Кодировка терминала, должна совпадать с той, которая используется для вывода в терминал
+set termencoding=utf-8
+
+" возможные кодировки файлов и последовательность определения.
+set fileencodings=utf8,cp1251
+
 " Set encoding
 set encoding=utf8
 
