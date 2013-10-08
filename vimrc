@@ -39,7 +39,7 @@ Bundle 'earendel'
 Bundle 'Align'
 Bundle 'SQLUtilities'
 Bundle 'bufexplorer.zip'
-Bundle 'minibufexplorerpp'
+""Bundle 'minibufexplorerpp'
 
 filetype plugin indent on
 
@@ -103,6 +103,9 @@ set incsearch
 " We want magic for regular expressions
 set magic
 
+" Показывать незавершённые команды в статусбаре
+set showcmd
+
 " We don't like noise on errors
 set noerrorbells
 set novisualbell
@@ -165,6 +168,25 @@ map <C-Up> <C-W>+
 map <C-Down> <C-W>-
 map <C-Left> <C-W><
 map <C-Right> <C-W>>
+
+" Switch to alternate file
+map <leader>b :bnext<cr>
+map <C-S-Tab> :bprevious<cr>
+
+"" BufExplorer mappings
+nmap <F5> <Esc>:BufExplorer<cr>
+vmap <F5> <esc>:BufExplorer<cr>
+imap <F5> <esc>:BufExplorer<cr>
+
+" F6 - предыдущий буфер
+nmap <F6> :bp<cr>
+vmap <F6> <esc>:bp<cr>i
+imap <F6> <esc>:bp<cr>i
+"
+" F7 - следующий буфер
+nmap <F7> :bn<cr>
+vmap <F7> <esc>:bn<cr>i
+imap <F7> <esc>:bn<cr>i
 
 " Map to close a window
 nnoremap <leader>q <C-w>q
@@ -276,9 +298,9 @@ set showmatch
 hi MatchParen cterm=none ctermbg=254 ctermfg=red 
 
 " Configure bufferlist
-noremap <silent> <leader>b :TSelectBuffer<cr>
-inoremap <silent> <leader>b :TSelectBuffer<cr> 
-let g:tselectbuffer#autopick=0
+""noremap <silent> <leader>b :TSelectBuffer<cr>
+""inoremap <silent> <leader>b :TSelectBuffer<cr> 
+""let g:tselectbuffer#autopick=0
 
 " A convenient map for zoom-in/zoom-out window
 nnoremap <silent> <Leader><Space> :ZoomWin<CR>
