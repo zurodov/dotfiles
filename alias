@@ -1,6 +1,10 @@
 
 alias cath="cat /etc/hosts"
 alias vicfg="vim ~/.vimrc"
+alias catm="cat /etc/make.conf"
+alias catmp="cat /etc/portage/make.conf"
+alias vimk="sudo vim /etc/make.conf" 
+alias vimkp="sudo vim /etc/portage/make.conf" 
 alias vih="sudo vim /etc/hosts"
 alias naf="sudo pppd call nafta"
 alias df="df -h"
