@@ -71,6 +71,9 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 #cd .vim; make install
 
 ### VIM + Vorax IDE install
+su - zur
+echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
+exit
 emerge -vp dev-lang/ruby
 eselect ruby set ruby19
 echo "app-editors/vim ruby" >> /etc/portage/package.use/vim_vorax
