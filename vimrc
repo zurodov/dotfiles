@@ -63,7 +63,7 @@ inoremap jj <Esc>
 nmap <leader>w :w!<cr>
 
 " See context for the current line
-set scrolloff=3
+set scrolloff=5
 
 " Don't make windows equal after a split
 set noea
