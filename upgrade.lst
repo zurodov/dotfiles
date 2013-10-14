@@ -35,12 +35,13 @@ gem install rhc
 /usr/NX/bin/nxserver --useradd username
 
 emerge app-emulation/virtualbox-extpack-oracle -vbk
-emerge app-emulation/virtualbox-guest-additions -vbk
 emerge app-emulation/virtualbox-modules -vbk
+#modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
+#/etc/init.d/vboxdrv setup
+# !!! in VM !!!
+emerge app-emulation/virtualbox-guest-additions -vbk
 /etc/init.d/virtualbox-guest-additions start
 rc-update add virtualbox-guest-additions default
-#/etc/init.d/vboxdrv setup
-#modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
 mount -t vboxsf <shared_folder_name> <mount_point>
 
 emerge --autounmask-write =sci-geosciences/googleearth-6.0.3.2197
