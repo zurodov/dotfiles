@@ -79,13 +79,13 @@ set wildmode=list:longest
 set ruler
 
 "" Set numbering
-set nu
+set number
 
 "" Command bar height
 set cmdheight=2
 
 " Change buffer without saving
-set hid
+set hidden
 
 " Set backspace config
 set backspace=eol,start,indent
@@ -154,11 +154,11 @@ set smarttab
 set shiftround
 
 " Auto indent
-set ai
-set ci
+set autoindent
+set copyindent
 
 " Smart indent
-set si
+set smartindent
 
 " No wrap
 set nowrap
@@ -213,6 +213,9 @@ let g:SuperTabLongestEnhanced=1
 
 "" NERDTree configuration
 let g:NERDTreeHighlightCursorline = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeShowHidden = 1
 map <leader>ff :NERDTreeToggle<CR>
 let NERDTreeMapJumpPrevSibling = ''
 let NERDTreeMapHelp = 'H'
