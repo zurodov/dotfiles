@@ -8,21 +8,20 @@ env-update && source /etc/profile
 
 eselect profile set 21
 eselect fontconfig enable {1..40}
-emerge -pv calculate-templates
 
 rc-update add openvpn default
 
 emerge apcupsd
-rc-update add apcupsd.powerfail shutdown
-rc-update add apcupsd default
-emerge -vp dev-java/sun-jdk
+rc-update add apcupsd.powerfail shutdown && rc-update add apcupsd default
+#emerge -p dev-java/sun-jdk
+emerge dev-java/oracle-jdk-bin
 
 # ruby on rails install
 ###emerge -v dev-ruby/rubygems
 ###sudo gem install rhc
 ###rhc domain show
 
-emerge -v dev-libs/libyaml
+emerge dev-libs/libyaml
 
 curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --ruby --rails --autolibs=3
 
@@ -34,12 +33,11 @@ gem install rhc
 
 /usr/NX/bin/nxserver --useradd username
 
-emerge app-emulation/virtualbox-extpack-oracle -vbk
-emerge app-emulation/virtualbox-modules -vbk
+emerge app-emulation/virtualbox-extpack-oracle -bk
+emerge app-emulation/virtualbox-modules -bk
 #modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
-#/etc/init.d/vboxdrv setup
 # !!! in VM !!!
-emerge app-emulation/virtualbox-guest-additions -vbk
+emerge app-emulation/virtualbox-guest-additions -bk
 /etc/init.d/virtualbox-guest-additions start
 rc-update add virtualbox-guest-additions default
 mount -t vboxsf <shared_folder_name> <mount_point>
@@ -47,18 +45,18 @@ mount -t vboxsf <shared_folder_name> <mount_point>
 emerge --autounmask-write =sci-geosciences/googleearth-6.0.3.2197
 emerge --autounmask-write =sci-geosciences/googleearth-7.1.1.1871
 dispatch-conf
-emerge -vbk sci-geosciences/googleearth
+emerge -bk sci-geosciences/googleearth
 
 emerge --autounmask-write =media-gfx/rawtherapee-4.0.11
 dispatch-conf
-emerge -vbk media-gfx/rawtherapee
+emerge -bk media-gfx/rawtherapee
 
 sensors-detect
 sensors
 /etc/init.d/lm_sensors start
 rc-update add lm_sensors default
 
-emerge -v noip-updater
+emerge noip-updater
 /etc/init.d/noip start
 rc-update add noip default
 
@@ -75,11 +73,12 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 su - zur
 echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
 exit
-emerge -vp dev-lang/ruby
+echo "dev-lang/ruby:2.0" >> /etc/portage/package.mask/ruby20disable
+emerge dev-lang/ruby -p 
 eselect ruby set ruby19
 echo "app-editors/vim ruby" >> /etc/portage/package.use/vim_vorax
 eselect bashcomp enable rake
-emerge -vp dev-db/oracle-instantclient-sqlplus
+emerge dev-db/oracle-instantclient-sqlplus -p 
 
 su - username   ###
 env|grep TNS_ADMIN
@@ -91,13 +90,14 @@ gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-x
 gem install vorax -r
 
 su -       ###
-emerge -vp app-editors/vim
-emerge -vp app-vim/l9
+emerge app-editors/vim -p
+emerge app-vim/l9 -p
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 emerge --autounmask-write =www-apps/swish-e-2.4.7
-emerge -vp www-apps/swish-e
+emerge www-apps/swish-e -p
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
 
+emerge x11-themes/gtk-engines-murrine x11-themes/murrine-themes
 cl-core-setup --pkg-name=mc
