@@ -36,6 +36,7 @@ gem install rhc
 emerge app-emulation/virtualbox-extpack-oracle -bk
 emerge app-emulation/virtualbox-modules -bk
 #modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
+usermod -a -G vboxusers zur && grpconv
 # !!! in VM !!!
 emerge app-emulation/virtualbox-guest-additions -bk
 /etc/init.d/virtualbox-guest-additions start
@@ -100,4 +101,5 @@ emerge www-apps/swish-e -p
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
 
 emerge x11-themes/gtk-engines-murrine x11-themes/murrine-themes
+emerge www-plugins/adobe-flash
 cl-core-setup --pkg-name=mc
