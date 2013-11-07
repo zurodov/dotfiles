@@ -1,5 +1,36 @@
-" We don't want vi compatibility.
-set nocompatible
+
+set nocompatible    " We don't want vi compatibility.
+
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+"" github plugins
+Bundle 'gmarik/vundle'
+Bundle 'bling/vim-airline'
+Bundle 'talek/vorax'
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'vimwiki/vimwiki'
+"" vim site plugins
+Bundle 'tlib'
+Bundle 'xptemplate'
+Bundle 'earendel'
+Bundle 'Align'
+Bundle 'SQLUtilities'
+Bundle 'bufexplorer.zip'
+""Bundle 'minibufexplorerpp'
+
+filetype plugin indent on " завершение настроек Vundle
+
+" Automatically detect file types.
+filetype plugin on
+filetype indent on
 
 " shorten command-line text and other info tokens
 set shortmess=atI
@@ -16,36 +47,6 @@ set wildignore=*.swp,*.bak
 " No backups file. Use a source control system.
 set nobackup
 set noswapfile
-
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-
-"" github plugins
-Bundle 'bling/vim-airline'
-Bundle 'talek/vorax'
-Bundle 'ervandew/supertab'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-"" vim site plugins
-Bundle 'tlib'
-Bundle 'xptemplate'
-Bundle 'earendel'
-Bundle 'Align'
-Bundle 'SQLUtilities'
-Bundle 'bufexplorer.zip'
-""Bundle 'minibufexplorerpp'
-
-filetype plugin indent on
-
-" Automatically detect file types.
-filetype plugin on
-filetype indent on
 
 " Set to auto read when a file is changed from outside
 set autoread
@@ -80,6 +81,10 @@ set ruler
 
 "" Set numbering
 set number
+
+"" Long lines
+set textwidth=80
+set colorcolumn=+1
 
 "" Command bar height
 set cmdheight=2
