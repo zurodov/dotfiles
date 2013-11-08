@@ -222,6 +222,7 @@ let g:NERDTreeHighlightCursorline = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeShowBookmarks = 1
 map <leader>ff :NERDTreeToggle<CR>
 let NERDTreeMapJumpPrevSibling = ''
 let NERDTreeMapHelp = 'H'
