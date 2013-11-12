@@ -2,11 +2,12 @@
 if has("gui_running")        " если запущен gvim, то...
     winpos 0 0               " положение окна при запуске
     set guioptions-=T        " убрать панель инструментов
-""    set guioptions-=m        " убрать меню
+    set guioptions+=m        " убрать меню
     set guioptions-=l        " убрать левый скроллбар
     set guioptions-=L        " убрать левый скроллбар у сплита
     set guioptions-=r        " убрать правый скроллбар
     set guioptions-=R        " убрать правый скроллбар у сплита
+    set guioptions-=e        " Отключаем графические табы
     set mousehide            " не показывать курсор во время печати
     set cursorline           " подсветка строки с курсором
     set linespace=0          " межстрочный интервал
@@ -17,6 +18,6 @@ endif
 
 " set font only on windows GUI version
 if has('gui')
-	set guifont=Droid_Sans_Mono:h17
+	set guifont=Droid\ Sans\ Mono\ 17
 endif
 
