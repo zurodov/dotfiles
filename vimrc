@@ -1,4 +1,7 @@
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                            Менеджер плагинов                    #vundle "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible    " We don't want vi compatibility.
 
 filetype off
@@ -28,33 +31,67 @@ Bundle 'bufexplorer.zip'
 ""Bundle 'minibufexplorerpp'
 
 filetype plugin indent on " завершение настроек Vundle
-
-" Automatically detect file types.
-filetype plugin on
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             Общие настройки                       #main "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin on      " Automatically detect file types.
 filetype indent on
 
-" shorten command-line text and other info tokens
-set shortmess=atI
+augroup myvimrc     " autoreload .vimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
+augroup END
 
-" How many lines of history to remember
-set history=1000
+let s:us_portable = 1 " не использовать зависимостей
 
-" Set a large undo tree
-set undolevels=1000
+set acd  " autochangedir - директория зависит от открытого файла    #currentdir
 
-" Ignore some files from completion
-set wildignore=*.swp,*.bak
+" Поддержка команд при включённой русской раскладке
+set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
-" No backups file. Use a source control system.
-set nobackup
-set noswapfile
+set lz                         " включает lazyredraw, даёт прирост производительности
 
-" Set to auto read when a file is changed from outside
-set autoread
+set backspace=indent,eol,start " с чем будет работать клавиша backspace
+set virtualedit=onemore        " возможность перемещения за конец строки
+set clipboard=unnamedplus      " использовать системный буфер обмена
+set undolevels=1000            " максимальное количество уровней отмены изменений
+set history=1000               " How many lines of history to remember
 
-" Set title automatically
-set title
 
+" Работа с файлами
+set ffs=unix,dos,mac           " Set default file format
+set fileencodings=utf-8,cp1251,koi8-r,cp866 " приоритет подбора возможных кодировок файла
+set termencoding=utf-8         " Кодировка терминала, должна совпадать с той, которая используется для вывода в терминал
+set encoding=utf-8             " кодировка по умолчанию
+set autoread                   " автоматически перезагружать файлы, изменённые извне
+set nobackup                   " No backups file. Use a source control system.
+set noswapfile                 " отключить своп-файлы
+
+set shortmess=atI              " shorten command-line text and other info tokens
+set title                      " Set title automatically
+set wildmenu                   " включить меню выбора
+set wcm=<Tab>                  " переключение элементов меню
+set wildmode=list:longest,full " отображать меню в виде полного списка
+
+" Файлы, которые будут игнорироваться в wildmenu
+if has("wildignore")
+    set wildignore+=*.a,*.o,*.pyc
+    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+    set wildignore+=*.avi,*.mp4,*.mp3,*.ogg
+    set wildignore+=*.zip,*.rar,*.tar,*.iso,*.7z,*.bz2
+    set wildignore+=*.pdf,*.djvu,*.doc,*.odt,*.xsl,*.rtf
+    set wildignore+=.DS_Store,.git,.hg,.svn
+    set wildignore+=*~,*.swp,*.tmp,*.bak
+endif
+
+" Enable syntax colloring
+syntax enable
+
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Set a more convinient map leader
 let mapleader=','
 
@@ -72,10 +109,6 @@ set noea
 
 " Set a faster tty
 set ttyfast
-
-" Turn on wild menu
-set wildmenu
-set wildmode=list:longest
 
 "" Always show current position
 set ruler
@@ -129,27 +162,6 @@ cnoremap <C-j> <Down>
 
 " Clear highlighting after search
 nmap <silent> ,, :nohlsearch<cr>
-
-" Enable syntax colloring
-syntax enable
-
-set t_Co=256
-set background=dark
-""colorscheme earendel
-let g:solarized_termcolors=256
-colorscheme solarized
-
-" Кодировка терминала, должна совпадать с той, которая используется для вывода в терминал
-set termencoding=utf-8
-
-" возможные кодировки файлов и последовательность определения.
-set fileencodings=utf8,cp1251
-
-" Set encoding
-set encoding=utf8
-
-" Set default file format
-set ffs=unix,dos,mac
 
 " Set tabbing
 set expandtab
