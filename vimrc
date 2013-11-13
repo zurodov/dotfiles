@@ -19,6 +19,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-fugitive'
 Bundle 'vimwiki/vimwiki'
 Bundle 'vim-scripts/bash-support.vim'
 "" vim site plugins
