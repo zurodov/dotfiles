@@ -50,3 +50,6 @@ fi
 
 install_zsh
 
+# add custom oh_my_zsh config
+ln -s $dir/00-zur.zsh ~/.oh-my-zsh/custom/00-zur.zsh
+

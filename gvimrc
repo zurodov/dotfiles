@@ -2,7 +2,7 @@
 if has("gui_running")        " если запущен gvim, то...
     winpos 0 0               " положение окна при запуске
     set guioptions-=T        " убрать панель инструментов
-    set guioptions+=m        " убрать меню
+"    set guioptions+=m        " убрать меню
     set guioptions-=l        " убрать левый скроллбар
     set guioptions-=L        " убрать левый скроллбар у сплита
     set guioptions-=r        " убрать правый скроллбар
@@ -21,3 +21,24 @@ if has('gui')
 	set guifont=Droid\ Sans\ Mono\ 17
 endif
 
+" Меню - по умолчанию скрыто
+    set guioptions-=m
+
+    " Горячие клавиши скрытия/отображения меню -->
+        function MyToggleMenu()
+            let old_guioptions = &guioptions
+
+            " Если меню в данный момент видимо
+            if stridx(old_guioptions, 'm') != -1
+                set guioptions-=m
+            else
+                set guioptions+=m
+            endif
+        endfunction
+
+        cmap <F12> <ESC>:call MyToggleMenu()<CR>
+        imap <F12> <ESC>:call MyToggleMenu()<CR>
+        nmap <F12> :call MyToggleMenu()<CR>
+        vmap <F12> <ESC>:call MyToggleMenu()<CR>
+    " Горячие клавиши скрытия/отображения меню <--
+" Меню <--
