@@ -218,6 +218,8 @@ nnoremap <leader>q <C-w>q
 " Always hide the statusline
 set laststatus=2
 
+set ttimeoutlen=50        " airline speed-up hack
+
 "" Format the statusline
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 
