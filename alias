@@ -1,9 +1,11 @@
 
 alias cath="cat /etc/hosts"
+alias catns="cat ~/.oracle/tnsnames.ora"
 alias vicfg="vim ~/.vimrc"
 alias catm="cat /etc/make.conf"
 alias catmp="cat /etc/portage/make.conf"
 alias vimk="sudo vim /etc/make.conf" 
+alias vitns="vim ~/.oracle/tnsnames.ora" 
 alias vimkp="sudo vim /etc/portage/make.conf" 
 alias e_synk="sudo /usr/bin/eix-synk" 
 alias vih="sudo vim /etc/hosts"
