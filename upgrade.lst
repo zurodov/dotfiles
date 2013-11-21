@@ -7,7 +7,7 @@ chroot /mnt/tmp
 env-update && source /etc/profile
 
 eselect profile set 21
-eselect fontconfig enable {1..40}
+eselect fontconfig enable {1..43}
 
 rc-update add openvpn default
 
@@ -65,15 +65,7 @@ emerge -avuDNp world
 
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
-#git clone git://github.com/astrails/dotvim.git
-#ln -sfn dotvim .vim
-#ln -sfn dotvim/vimrc .vimrc
-#cd .vim; make install
-
 ### VIM + Vorax IDE install
-su - zur
-echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
-exit
 echo "dev-lang/ruby:2.0" >> /etc/portage/package.mask/ruby20disable
 emerge dev-lang/ruby -p 
 eselect ruby set ruby19
@@ -92,7 +84,6 @@ gem install vorax -r
 
 su -       ###
 emerge app-editors/vim -p
-emerge app-vim/l9 -p
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
