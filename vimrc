@@ -23,6 +23,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'vimwiki/vimwiki'
 Bundle 'vim-scripts/bash-support.vim'
 "" vim site plugins
+Bundle 'L9'
 Bundle 'tlib'
 Bundle 'xptemplate'
 Bundle 'earendel'
