@@ -348,3 +348,4 @@ function! RunShebang()
 endfunction
 map <F9> :call RunShebang()<CR>
 
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_export': 1}]
