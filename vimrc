@@ -12,7 +12,7 @@ call vundle#rc()
 "" github plugins
 Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
-Bundle 'talek/vorax'
+Bundle 'talek/vorax4-beta'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
