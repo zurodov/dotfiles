@@ -11,4 +11,5 @@ alias e_synk="sudo /usr/bin/eix-synk"
 alias vih="sudo vim /etc/hosts"
 alias naf="sudo pppd call nafta"
 alias df="df -h"
+alias ping="ping -c3"
 
