@@ -9,6 +9,11 @@ env-update && source /etc/profile
 eselect profile set 21
 eselect fontconfig enable {1..43}
 
+vi /etc/default/grub
+# del ",splash=silent,theme:calculate" "quiet" 
+grub-mkconfig > /boot/grub/grub.cfg
+rc-update del fbcondecor
+
 rc-update add openvpn default
 
 emerge apcupsd
@@ -21,9 +26,8 @@ emerge dev-java/oracle-jdk-bin
 ###sudo gem install rhc
 ###rhc domain show
 
-emerge dev-libs/libyaml
-
-curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --ruby --rails --autolibs=3
+##emerge dev-libs/libyaml
+##curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --ruby --rails --autolibs=3
 
 gem install rdoc
 #gem install rails
@@ -34,7 +38,7 @@ gem install rhc
 /usr/NX/bin/nxserver --useradd username
 
 emerge app-emulation/virtualbox-extpack-oracle -bk
-emerge app-emulation/virtualbox-modules -bk
+emerge app-emulation/virtualbox-modules
 #modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
 usermod -a -G vboxusers zur && grpconv
 # !!! in VM !!!
@@ -67,28 +71,29 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 
 ### VIM + Vorax IDE install
 echo "dev-lang/ruby:2.0" >> /etc/portage/package.mask/ruby20disable
-emerge dev-lang/ruby -p 
-eselect ruby set ruby19
+### mv ~/zur/.gem/ruby/1.9.1 ~/zur/.gembackup
+emerge dev-lang/ruby
+###eselect ruby set ruby19
+emerge dev-ruby/execjs
 echo "app-editors/vim ruby" >> /etc/portage/package.use/vim_vorax
+echo "app-editors/gvim ruby" >> /etc/portage/package.use/vim_vorax
 eselect bashcomp enable rake
-emerge dev-db/oracle-instantclient-sqlplus -p 
+emerge dev-db/oracle-instantclient-sqlplus 
 
 su - username   ###
 env|grep TNS_ADMIN
 ruby -v
 gem list
-gem install antlr3 -r
-gem install activesupport -r
-gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib64/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib64/ -r
+### gem install antlr3 -r
+### gem install activesupport -r
+### gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib64/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib64/ -r
 gem install vorax -r
 
 su -       ###
-emerge app-editors/vim -p
+emerge app-editors/vim
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
-emerge --autounmask-write =www-apps/swish-e-2.4.7
-emerge www-apps/swish-e -p
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
 
 emerge x11-themes/gtk-engines-murrine x11-themes/murrine-themes
