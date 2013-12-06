@@ -16,6 +16,8 @@ else                         " если запущен vim, то...
     set t_Co=256             " количество используемых цветов в терминале
 endif
 
+set clipboard+=unnamed
+
 " set font only on windows GUI version
 if has('gui')
 	set guifont=Droid\ Sans\ Mono\ 17

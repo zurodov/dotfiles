@@ -348,4 +348,30 @@ function! RunShebang()
 endfunction
 map <F9> :call RunShebang()<CR>
 
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_export': 1}]
+" let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_export': 1}]
+
+    let wiki_1 = {}
+    let wiki_1.path = '/my/vimwiki/'
+    let wiki_1.path_html = '/my/vimwiki/html'
+    let wiki_1.auto_export = '1'
+
+    let wiki_2 = {}
+    let wiki_2.path = '/my/vimwiki.pri/'
+    let wiki_2.path_html = '/my/vimwiki.pri/html'
+    let wiki_2.auto_export = '1'
+
+    let g:vimwiki_list = [wiki_1, wiki_2]
+    let g:vimwiki_url_maxsave = 42
+
+" Airline customisation
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+  "let g:airline_left_sep = '▶'
+  "let g:airline_right_sep = '◀'
+  let g:airline_symbols.linenr = '␊'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'ρ'
+" figitive integration
+  let g:airline#extensions#branch#enabled = 1
