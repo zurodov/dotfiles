@@ -9,6 +9,7 @@ env-update && source /etc/profile
 eselect profile set 21
 eselect fontconfig enable {1..43}
 
+grub-install --target=x86_64-efi
 vi /etc/default/grub
 # del ",splash=silent,theme:calculate" "quiet" 
 grub-mkconfig > /boot/grub/grub.cfg
