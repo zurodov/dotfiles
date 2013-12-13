@@ -1,20 +1,20 @@
 # xfce
-#
-mkdir /mnt/tmp
-mount /dev/sda3 /mnt/tmp
+# !!! boot in UEFI-mode !!!
+mkdir /mnt/tmp /mnt/tmp4 /mnt/my
+mount /dev/sda2 /mnt/tmp
 mount -t proc none /mnt/tmp/proc && mount -o bind /dev /mnt/tmp/dev && mount -o bind /sys /mnt/tmp/sys
 chroot /mnt/tmp
 env-update && source /etc/profile
 
-eselect profile set 21
-eselect fontconfig enable {1..43}
-
+mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi
 vi /etc/default/grub
 # del ",splash=silent,theme:calculate" "quiet" 
 grub-mkconfig > /boot/grub/grub.cfg
-rc-update del fbcondecor
 
+eselect profile set 21
+eselect fontconfig enable {1..43}
+rc-update del fbcondecor
 rc-update add openvpn default
 
 emerge apcupsd
@@ -104,3 +104,5 @@ cl-core-setup --pkg-name=mc
 xrandr -q
 xrandr --output VGA1 --mode 1600x1200 --auto
 xrandr --output VGA1 --left-of HDMI1
+
+emerge -C calculate-client nss_ldap
