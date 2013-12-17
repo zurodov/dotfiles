@@ -13,5 +13,6 @@ alias e_synk="sudo /usr/bin/eix-synk"
 alias vih="sudo vim /etc/hosts"
 alias naf="sudo pppd call nafta"
 alias df="df -h"
+alias slog="sudo tail -100 /var/log/messages"
 alias ping="ping -c3"
-
+alias pya="ping ya.ru"
