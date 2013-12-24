@@ -2,6 +2,7 @@
 alias cath="cat /etc/hosts"
 alias catu="cat ~/dotfiles/upgrade.lst"
 alias viupg="vim ~/dotfiles/upgrade.lst"
+alias catr="grep build /etc/calculate/calculate.env"
 alias catns="cat ~/.oracle/tnsnames.ora"
 alias vicfg="vim ~/.vimrc"
 alias catm="cat /etc/make.conf"
