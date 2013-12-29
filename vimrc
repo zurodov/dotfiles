@@ -123,7 +123,7 @@ set textwidth=80
 set colorcolumn=+1
 
 "" Command bar height
-set cmdheight=2
+set cmdheight=1
 
 " Change buffer without saving
 set hidden
@@ -351,13 +351,13 @@ map <F9> :call RunShebang()<CR>
 " let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_export': 1}]
 
     let wiki_1 = {}
-    let wiki_1.path = '/my/vimwiki/'
-    let wiki_1.path_html = '/my/vimwiki/html'
+    let wiki_1.path = '~/vimwiki/'
+    let wiki_1.path_html = '~/vimwiki/html'
     let wiki_1.auto_export = '1'
 
     let wiki_2 = {}
-    let wiki_2.path = '/my/vimwiki.pri/'
-    let wiki_2.path_html = '/my/vimwiki.pri/html'
+    let wiki_2.path = '~/vimwiki.pri/'
+    let wiki_2.path_html = '~/vimwiki.pri/html'
     let wiki_2.auto_export = '1'
 
     let g:vimwiki_list = [wiki_1, wiki_2]
