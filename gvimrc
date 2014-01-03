@@ -20,7 +20,7 @@ set clipboard+=unnamed
 
 " set font only on windows GUI version
 if has('gui')
-	set guifont=Droid\ Sans\ Mono\ 17
+	set guifont=Droid\ Sans\ Mono\ 15
 endif
 
 " Меню - по умолчанию скрыто
