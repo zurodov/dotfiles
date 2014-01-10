@@ -105,3 +105,31 @@ xrandr --output VGA1 --mode 1600x1200 --auto
 xrandr --output VGA1 --left-of HDMI1
 
 emerge -C calculate-client nss_ldap
+
+USE="infinality" emerge media-libs/freetype
+eselect fontconfig enable 52-infinality.conf
+eselect infinality set nyx
+eselect lcdfilter set nyx
+
+eselect fontconfig disable 10-autohint.conf
+eselect fontconfig disable 10-no-sub-pixel.conf
+eselect fontconfig disable 10-sub-pixel-bgr.conf
+eselect fontconfig disable 10-sub-pixel-bgr.conf
+eselect fontconfig disable 10-sub-pixel-vbgr.conf
+eselect fontconfig disable 10-sub-pixel-vrgb.conf
+eselect fontconfig disable 10-unhinted.conf
+eselect fontconfig disable 11-lcdfilter-legacy.conf
+eselect fontconfig disable 11-lcdfilter-light.conf
+eselect fontconfig disable 20-unhint-small-dejavu-sans.conf
+eselect fontconfig disable 20-unhint-small-dejavu-sans-mono.conf
+eselect fontconfig disable 20-unhint-small-dejavu-serif.conf
+eselect fontconfig disable 25-unhint-nonlatin.conf
+eselect fontconfig disable 57-dejavu-sans.conf
+eselect fontconfig disable 57-dejavu-sans-mono.conf
+eselect fontconfig disable 57-dejavu-serif.conf
+eselect fontconfig disable 59-google-droid-sans.conf
+eselect fontconfig disable 59-google-droid-sans-mono.conf
+eselect fontconfig disable 59-google-droid-serif.conf
+eselect fontconfig disable 65-khmer.conf
+eselect fontconfig disable 70-yes-bitmaps.conf
+
