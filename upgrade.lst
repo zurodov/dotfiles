@@ -1,9 +1,7 @@
-# xfce
 # !!! boot in UEFI-mode !!!
-mkdir /mnt/tmp /mnt/tmp4 /mnt/my
-mount /dev/sda2 /mnt/tmp
-mount -t proc none /mnt/tmp/proc && mount -o bind /dev /mnt/tmp/dev && mount -o bind /sys /mnt/tmp/sys
-chroot /mnt/tmp
+mount /dev/sda2 /mnt
+mount -t proc none /mnt/proc && mount -o bind /dev /mnt/dev && mount -o bind /sys /mnt/sys
+chroot /mnt
 env-update && source /etc/profile
 
 mount /dev/sda1 /boot/efi
@@ -47,13 +45,7 @@ emerge app-emulation/virtualbox-guest-additions -bk
 rc-update add virtualbox-guest-additions default
 mount -t vboxsf <shared_folder_name> <mount_point>
 
-emerge --autounmask-write =sci-geosciences/googleearth-6.0.3.2197
-emerge --autounmask-write =sci-geosciences/googleearth-7.1.1.1871
-dispatch-conf
 emerge -bk sci-geosciences/googleearth
-
-emerge --autounmask-write =media-gfx/rawtherapee-4.0.11
-dispatch-conf
 emerge -bk media-gfx/rawtherapee
 
 sensors-detect
@@ -70,22 +62,13 @@ emerge -avuDNp world
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 # VIM + Vorax IDE install
-###echo "dev-lang/ruby:2.0" >> /etc/portage/package.mask/ruby20disable
-# mv ~/zur/.gem/ruby/1.9.1 ~/zur/.gembackup
-###emerge dev-lang/ruby
-#eselect ruby set ruby19
 emerge net-libs/nodejs
-###echo "app-editors/vim ruby" >> /etc/portage/package.use/vim_vorax
-###echo "app-editors/gvim ruby" >> /etc/portage/package.use/vim_vorax
 eselect bashcomp enable rake
 emerge dev-db/oracle-instantclient-sqlplus 
 
 su - username   ###
 env|grep TNS_ADMIN
-ruby -v
 gem list
-### gem install antlr3 -r
-### gem install activesupport -r
 ### gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib64/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib64/ -r
 gem install vorax -r
 
