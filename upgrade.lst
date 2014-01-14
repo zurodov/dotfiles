@@ -85,7 +85,7 @@ cl-core-setup --pkg-name=mc
 
 xrandr -q
 xrandr --output VGA1 --mode 1600x1200 --auto
-xrandr --output VGA1 --left-of HDMI1
+xrandr --output VGA1 --right-of HDMI1
 
 emerge -C calculate-client nss_ldap
 
