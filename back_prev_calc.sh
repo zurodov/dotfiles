@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-cd /mnt/tmp
+cd /mnt
 
 BUILD=`grep "os_linux_build" ./etc/calculate/calculate.env | cut -f3 -d " "`
 BACK="/var/calculate/backup"
