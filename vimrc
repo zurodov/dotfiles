@@ -279,7 +279,7 @@ let g:sqlutil_align_comma = 1
 xmap <silent> <leader>fo :SQLUFormatter<cr>
 
 " Open VoraX documentation in screen
-let g:vorax_oradoc_open_with="silent! !opera '%u'"
+let g:vorax_oradoc_open_cmd="opera '%u'"
 
 let g:vorax_resultwin_clear = 0
 let g:vorax_key_for_exec_buffer = "<F8>"
