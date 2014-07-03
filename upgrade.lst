@@ -12,10 +12,11 @@ grub-mkconfig > /boot/grub/grub.cfg
 
 vi /etc/fstab    add discard option for EXT4
 
-eselect profile set 21
+eselect profile set 20
 eselect fontconfig enable {1..43}
 rc-update del fbcondecor
 
+emerge util-linux
 emerge apcupsd
 rc-update add apcupsd.powerfail shutdown && rc-update add apcupsd default
 #emerge -p dev-java/sun-jdk
