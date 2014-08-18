@@ -13,7 +13,7 @@ grub-mkconfig > /boot/grub/grub.cfg
 vi /etc/fstab    add discard option for EXT4
 
 eselect profile set 20
-eselect fontconfig enable {1..43}
+eselect fontconfig enable {1..40}
 rc-update del fbcondecor
 
 emerge util-linux
@@ -76,6 +76,7 @@ gem list
 gem install vorax -r
 
 su -       ###
+emerge =dev-lang/ruby-1.9.3*
 emerge app-editors/vim
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
