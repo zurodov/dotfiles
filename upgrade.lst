@@ -85,6 +85,7 @@ http://www.oracle.com/technetwork/database/enterprise-edition/documentation/data
 
 emerge x11-themes/gtk-engines-murrine x11-themes/murrine-themes
 emerge www-plugins/adobe-flash
+emerge xfce-extra/xfce4-timer-plugin
 cl-core-setup --pkg-name=mc
 
 xrandr -q
