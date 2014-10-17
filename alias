@@ -18,5 +18,5 @@ alias df="df -h"
 alias slog="sudo tail -100 /var/log/messages"
 alias ping="ping -c3"
 alias pya="ping ya.ru"
-alias dualmon="xrandr --output VGA1 --mode 1600x1200 --auto --right-of HDMI1"
+alias dualmon="xrandr --output HDMI1 --mode 1920x1080 --auto --left-of VGA1"
 
