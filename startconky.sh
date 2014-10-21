@@ -19,6 +19,6 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-sleep 10
+sleep 20
 /usr/bin/conky&
 
