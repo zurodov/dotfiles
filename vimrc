@@ -32,12 +32,28 @@ Bundle 'SQLUtilities'
 Bundle 'bufexplorer.zip'
 ""Bundle 'minibufexplorerpp'
 
+Plugin 'SirVer/ultisnips'                                                    
+Plugin 'honza/vim-snippets'                                                   
+Plugin 'Rip-Rip/clang_complete'
+
+" Zoomwin
+Bundle "ZoomWin"
+noremap <LocalLeader>o :ZoomWin<CR>
+vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
+inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
+noremap <C-W>+o :ZoomWin<CR>
+
 filetype plugin indent on " завершение настроек Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Общие настройки                       #main "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin on      " Automatically detect file types.
 filetype indent on
+
+set exrc                                                                     
+" Запретим опасные команды в локальных .vimrc файлах (эта опция должна идти в
+" вашем ~/.vimrc после запрещаемых команд, таких как write)
+set secure 
 
 augroup myvimrc     " autoreload .vimrc
     au!
@@ -335,7 +351,7 @@ hi MatchParen cterm=none ctermbg=254 ctermfg=red
 ""let g:tselectbuffer#autopick=0
 
 " A convenient map for zoom-in/zoom-out window
-nnoremap <silent> <Leader><Space> :ZoomWin<CR>
+""""nnoremap <silent> <Leader><Space> :ZoomWin<CR>
 
 " Execute a file which has a shebang
 function! RunShebang()
