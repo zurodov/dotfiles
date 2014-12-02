@@ -17,8 +17,8 @@
 #      REVISION: 0.0
 #===============================================================================
 
-set -o nounset                              # Treat unset variables as an error
+###set -o nounset                              # Treat unset variables as an error
 
-sleep 20
-/usr/bin/conky&
+killall conky
+/usr/bin/sleep 20 && /usr/bin/conky &
 
