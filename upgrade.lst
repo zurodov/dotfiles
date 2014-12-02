@@ -4,11 +4,34 @@ mount -t proc none /mnt/proc && mount -o bind /dev /mnt/dev && mount -o bind /sy
 chroot /mnt
 env-update && source /etc/profile
 
+# make kernel
+emerge calculate-sources
+cd /usr/src/linux
+make distclean
+zcat /proc/config.gz > .config
+make oldconfig  # если ядро обновилось, или
+make menuconfig # если играем настройками
+make
+make install
+make modules_install
+emerge @module-rebuild
+dracut --kver 3.14.25-test -Hf    # генерим initrd
+vi /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+# end make kernel
+#
+# put .config to template
+zcat /proc/config.gz > /var/calculate/templates/.config
+sed -i "1i # Calculate merge(sys-kernel/calculate-sources)!= ac_install_patch==on env=install cl_name==calculate-core" /var/calculate/templates/.config
+USE="vmlinuz" emerge calculate-sources
+#
+#
+#
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi
 vi /etc/default/grub
 # del ",splash=silent,theme:calculate" "quiet" 
-grub-mkconfig > /boot/grub/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg
 
 vi /etc/fstab    add discard option for EXT4
 
@@ -86,6 +109,7 @@ http://www.oracle.com/technetwork/database/enterprise-edition/documentation/data
 emerge x11-themes/gtk-engines-murrine x11-themes/murrine-themes
 emerge www-plugins/adobe-flash
 emerge xfce-extra/xfce4-timer-plugin
+emerge net-misc/youtube-dl
 cl-core-setup --pkg-name=mc
 
 xrandr -q
@@ -93,6 +117,7 @@ xrandr --output VGA1 --mode 1600x1200 --auto
 xrandr --output VGA1 --right-of HDMI1
 
 emerge -C calculate-client nss_ldap
+emerge -C net-wireless/broadcom-sta
 
 USE="infinality" emerge media-libs/freetype
 eselect fontconfig enable 52-infinality.conf
