@@ -17,6 +17,7 @@ make modules_install
 emerge @module-rebuild
 dracut --kver 3.14.25-test -Hf    # генерим initrd
 vi /etc/default/grub
+# del ",splash=silent,theme:calculate" "quiet" 
 grub-mkconfig -o /boot/grub/grub.cfg
 # end make kernel
 #
@@ -25,24 +26,14 @@ zcat /proc/config.gz > /var/calculate/templates/.config
 sed -i "1i # Calculate merge(sys-kernel/calculate-sources)!= ac_install_patch==on env=install cl_name==calculate-core" /var/calculate/templates/.config
 USE="vmlinuz" emerge calculate-sources
 #
-#
-#
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi
-vi /etc/default/grub
-# del ",splash=silent,theme:calculate" "quiet" 
-grub-mkconfig -o /boot/grub/grub.cfg
 
 vi /etc/fstab    add discard option for EXT4
 
-eselect profile set 20
-eselect fontconfig enable {1..40}
-rc-update del fbcondecor
-
-emerge util-linux
 emerge apcupsd
 rc-update add apcupsd.powerfail shutdown && rc-update add apcupsd default
-#emerge -p dev-java/sun-jdk
+#
 emerge dev-java/oracle-jdk-bin
 
 # ruby on rails install
@@ -63,16 +54,13 @@ gem install rhc
 
 emerge app-emulation/virtualbox-extpack-oracle -bk
 emerge app-emulation/virtualbox-modules
-#modprobe -a vboxdrv vboxnetflt vboxnetadp vboxvideo
+#modprobe -a vboxdrv vboxnetflt vboxnetadp
 usermod -a -G vboxusers zur && grpconv
 # !!! in VM !!!
 emerge app-emulation/virtualbox-guest-additions -bk
 /etc/init.d/virtualbox-guest-additions start
 rc-update add virtualbox-guest-additions default
 mount -t vboxsf <shared_folder_name> <mount_point>
-
-emerge -bk sci-geosciences/googleearth
-emerge -bk media-gfx/rawtherapee
 
 sensors-detect
 sensors
@@ -98,15 +86,10 @@ gem list
 ### gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib64/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib64/ -r
 gem install vorax -r
 
-su -       ###
-emerge =dev-lang/ruby-1.9.3*
-emerge app-editors/vim
-
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
 
-emerge x11-themes/gtk-engines-murrine x11-themes/murrine-themes
 emerge www-plugins/adobe-flash
 emerge xfce-extra/xfce4-timer-plugin
 emerge net-misc/youtube-dl
@@ -118,6 +101,8 @@ xrandr --output VGA1 --right-of HDMI1
 
 emerge -C calculate-client nss_ldap
 emerge -C net-wireless/broadcom-sta
+
+equery d sys-boot/plymouth
 
 USE="infinality" emerge media-libs/freetype
 eselect fontconfig enable 52-infinality.conf
@@ -163,3 +148,11 @@ eselect fontconfig disable 70-yes-bitmaps.conf
 eselect fontconfig enable 80-delicious.conf
 eselect fontconfig enable 99pdftoopvp.conf
 
+emerge calculate-assemble
+cl-assemble -pcldz -d/dev/sdc7 --iso /var/calculate/inst/calculate/cldx-20150113-x86_64.iso
+cl-make -D
+cl-make -u
+chroot /mnt/zur
+# прервать сборку
+cl-make -p zur --break
+cl-image -pcldz iso
