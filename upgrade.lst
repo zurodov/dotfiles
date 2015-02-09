@@ -3,23 +3,6 @@ mount /dev/sda2 /mnt
 mount -t proc none /mnt/proc && mount -o bind /dev /mnt/dev && mount -o bind /sys /mnt/sys
 chroot /mnt
 env-update && source /etc/profile
-
-# make kernel
-emerge calculate-sources
-cd /usr/src/linux
-make distclean
-zcat /proc/config.gz > .config
-make oldconfig  # если ядро обновилось, или
-make menuconfig # если играем настройками
-make
-make install
-make modules_install
-emerge @module-rebuild
-dracut --kver 3.14.25-test -Hf    # генерим initrd
-vi /etc/default/grub
-# del ",splash=silent,theme:calculate" "quiet" 
-grub-mkconfig -o /boot/grub/grub.cfg
-# end make kernel
 #
 # put .config to template
 zcat /proc/config.gz > /var/calculate/templates/.config
@@ -104,55 +87,3 @@ emerge -C net-wireless/broadcom-sta
 
 equery d sys-boot/plymouth
 
-USE="infinality" emerge media-libs/freetype
-eselect fontconfig enable 52-infinality.conf
-eselect infinality set nyx
-eselect lcdfilter set nyx
-
-eselect fontconfig disable 10-autohint.conf
-eselect fontconfig disable 10-no-sub-pixel.conf
-eselect fontconfig disable 10-sub-pixel-bgr.conf
-eselect fontconfig enable 10-sub-pixel-rgb.conf
-eselect fontconfig disable 10-sub-pixel-bgr.conf
-eselect fontconfig disable 10-sub-pixel-vbgr.conf
-eselect fontconfig disable 10-sub-pixel-vrgb.conf
-eselect fontconfig disable 10-unhinted.conf
-eselect fontconfig enable 11-lcdfilter-default.conf
-eselect fontconfig disable 11-lcdfilter-legacy.conf
-eselect fontconfig disable 11-lcdfilter-light.conf
-eselect fontconfig disable 20-unhint-small-dejavu-sans.conf
-eselect fontconfig disable 20-unhint-small-dejavu-sans-mono.conf
-eselect fontconfig disable 20-unhint-small-dejavu-serif.conf
-eselect fontconfig enable 20-unhint-small-vera.conf
-eselect fontconfig disable 25-unhint-nonlatin.conf
-eselect fontconfig enable 30-urw-aliases.conf
-eselect fontconfig enable 40-nonlatin.conf
-eselect fontconfig enable 45-latin.conf
-eselect fontconfig enable 49-sansserif.conf
-eselect fontconfig enable 50-user.conf
-eselect fontconfig enable 51-local.conf
-eselect fontconfig disable 57-dejavu-sans.conf
-eselect fontconfig disable 57-dejavu-sans-mono.conf
-eselect fontconfig disable 57-dejavu-serif.conf
-eselect fontconfig disable 59-google-droid-sans.conf
-eselect fontconfig disable 59-google-droid-sans-mono.conf
-eselect fontconfig disable 59-google-droid-serif.conf
-eselect fontconfig disable 60-latin.conf 
-eselect fontconfig disable 60-liberation.conf
-eselect fontconfig enable 65-fonts-persian.conf
-eselect fontconfig disable 65-khmer.conf
-eselect fontconfig enable 65-nonlatin.conf
-eselect fontconfig enable 69-unifont.conf
-eselect fontconfig enable 70-no-bitmaps.conf
-eselect fontconfig disable 70-yes-bitmaps.conf
-eselect fontconfig enable 80-delicious.conf
-eselect fontconfig enable 99pdftoopvp.conf
-
-emerge calculate-assemble
-cl-assemble -pcldz -d/dev/sdc7 --iso /var/calculate/inst/calculate/cldx-20150113-x86_64.iso
-cl-make -D
-cl-make -u
-chroot /mnt/zur
-# прервать сборку
-cl-make -p zur --break
-cl-image -pcldz iso
