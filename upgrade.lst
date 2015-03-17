@@ -1,37 +1,8 @@
 # !!! boot in UEFI-mode !!!
-mount /dev/sda2 /mnt
-mount -t proc none /mnt/proc && mount -o bind /dev /mnt/dev && mount -o bind /sys /mnt/sys
-chroot /mnt
-env-update && source /etc/profile
-#
-# put .config to template
-zcat /proc/config.gz > /var/calculate/templates/.config
-sed -i "1i # Calculate merge(sys-kernel/calculate-sources)!= ac_install_patch==on env=install cl_name==calculate-core" /var/calculate/templates/.config
-USE="vmlinuz" emerge calculate-sources
-#
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi
 
 vi /etc/fstab    add discard option for EXT4
-
-emerge apcupsd
-rc-update add apcupsd.powerfail shutdown && rc-update add apcupsd default
-#
-emerge dev-java/oracle-jdk-bin
-
-# ruby on rails install
-###emerge -v dev-ruby/rubygems
-###sudo gem install rhc
-###rhc domain show
-
-##emerge dev-libs/libyaml
-##curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --ruby --rails --autolibs=3
-
-gem install rdoc
-#gem install rails
-gem install execjs
-gem install therubyracer
-gem install rhc
 
 /usr/NX/bin/nxserver --useradd username
 
@@ -45,45 +16,23 @@ emerge app-emulation/virtualbox-guest-additions -bk
 rc-update add virtualbox-guest-additions default
 mount -t vboxsf <shared_folder_name> <mount_point>
 
-sensors-detect
-sensors
-/etc/init.d/lm_sensors start
-rc-update add lm_sensors default
-
-emerge noip-updater
-/etc/init.d/noip start
-rc-update add noip default
-
 emerge -avuDNp world
 
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-
-# VIM + Vorax IDE install
-emerge net-libs/nodejs
-eselect bashcomp enable rake
-emerge dev-db/oracle-instantclient-sqlplus 
-
-su - username   ###
-env|grep TNS_ADMIN
-gem list
-### gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib64/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib64/ -r
+# OpenShift install
+cd ~
+gem install rhc ;; rhc domain show
+# my dotfiles,oh-my-zsh,vundle install
+git clone https://github.com/zurodov/dotfiles.git
+cd ~/dotfiles
+sh makesymlinks.sh
+(?) git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+zsh
+# Vorax IDE install
+emerge dev-db/oracle-instantclient-sqlplus
+export TNS_ADMIN=~/.oracle ;; vi ~/.oracle/tnsnames.ora
 gem install vorax -r
-
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
+vi
+BundleInstall
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
 
-emerge www-plugins/adobe-flash
-emerge xfce-extra/xfce4-timer-plugin
-emerge net-misc/youtube-dl
 cl-core-setup --pkg-name=mc
-
-xrandr -q
-xrandr --output VGA1 --mode 1600x1200 --auto
-xrandr --output VGA1 --right-of HDMI1
-
-emerge -C calculate-client nss_ldap
-emerge -C net-wireless/broadcom-sta
-
-equery d sys-boot/plymouth
-
