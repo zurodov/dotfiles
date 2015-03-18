@@ -12,6 +12,10 @@ files="alias vimrc zshrc Xresources"    # list of files/folders to symlink in ho
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir
 echo "...done"
+if [[ ! -d $HOME/.oracle/ ]]; then
+    mkdir $HOME/.oracle/
+    cp $dotfiles/tnsnames.ora $HOME/.oracle/
+fi
 
 function install_zsh {
 # Test to see if zshell is installed.  If it is:
