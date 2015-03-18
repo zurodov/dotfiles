@@ -1,0 +1,9 @@
+# start tnsnames.ora
+TEST =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST=test)(PORT=1521))
+    (CONNECT_DATA = 
+  (SERVICE_NAME = TEST)
+    )
+  )
+# end tnsnames.ora
