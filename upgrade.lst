@@ -3,6 +3,8 @@ mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi
 
 vi /etc/fstab    add discard option for EXT4
+cl-core-setup --pkg-name=mc
+emerge -avuDNp world
 
 /usr/NX/bin/nxserver --useradd username
 
@@ -16,8 +18,6 @@ emerge app-emulation/virtualbox-guest-additions -bk
 rc-update add virtualbox-guest-additions default
 mount -t vboxsf <shared_folder_name> <mount_point>
 
-emerge -avuDNp world
-
 # OpenShift install
 cd ~
 gem install rhc ;; rhc domain show
@@ -25,14 +25,20 @@ gem install rhc ;; rhc domain show
 git clone https://github.com/zurodov/dotfiles.git
 cd ~/dotfiles
 sh makesymlinks.sh
-(?) git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-zsh
 # Vorax IDE install
 emerge dev-db/oracle-instantclient-sqlplus
-export TNS_ADMIN=~/.oracle ;; vi ~/.oracle/tnsnames.ora
+vi ~/.oracle/tnsnames.ora
+# start tnsnames.ora
+TEST =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST=test)(PORT=1521))
+    (CONNECT_DATA = 
+  (SERVICE_NAME = TEST)
+    )
+  )
+# end tnsnames.ora
 gem install vorax -r
 vi
 BundleInstall
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
 
-cl-core-setup --pkg-name=mc
