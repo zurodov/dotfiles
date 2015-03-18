@@ -4,17 +4,16 @@
 # creates symlinks to any desired dotfiles in ~/dotfiles
 ############################
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles/old             # old dotfiles backup directory
-files="alias vimrc zshrc Xresources"    # list of files/folders to symlink in homedir
+dir=~/dotfiles                        # dotfiles directory
+files="alias vimrc zshrc Xresources"  # list of files to symlink in homedir
 
 # create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-mkdir -p $olddir
+echo "Creating $dir/old for backup of any existing dotfiles in ~"
+mkdir -p $dir/old
 echo "...done"
 if [[ ! -d $HOME/.oracle/ ]]; then
     mkdir $HOME/.oracle/
-    cp $dotfiles/tnsnames.ora $HOME/.oracle/
+    cp $dir/tnsnames.ora $HOME/.oracle/
 fi
 
 function install_zsh {
@@ -45,8 +44,8 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 cd $dir
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles/old/
+    echo "Moving any existing dotfiles from ~ to $dir/old"
+    mv ~/.$file $dir/old/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
