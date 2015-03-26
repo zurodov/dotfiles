@@ -18,6 +18,7 @@ alias slog="sudo tail -100 /var/log/messages"
 alias ping="sudo ping -c3"
 alias pya="sudo ping -c3 ya.ru"
 alias pingz="sudo ping -c3 zurodov.no-ip.org"
-alias dualmon="xrandr --output HDMI2 --auto --left-of HDMI1 --output HDMI1 --mode 1920x1080 --brightness 0.5 --rotate normal"
+alias dualmon="xrandr --output HDMI2 --auto --left-of HDMI1 --output HDMI1
+--mode 1920x1080 --brightness 0.5 --pos 1200x200"
 
 
