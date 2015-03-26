@@ -1,7 +1,12 @@
 # !!! boot in UEFI-mode !!!
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi
-
+# chroot
+mount /dev/sda2 /mnt
+mount -t proc none /mnt/proc && mount -o bind /dev /mnt/dev && mount -o bind /sys /mnt/sys
+chroot /mnt
+env-update && source /etc/profile
+#
 vi /etc/fstab    add discard option for EXT4
 cl-core-setup --pkg-name=mc
 emerge -avuDNp world
@@ -17,6 +22,12 @@ emerge app-emulation/virtualbox-guest-additions -bk
 /etc/init.d/virtualbox-guest-additions start
 rc-update add virtualbox-guest-additions default
 mount -t vboxsf <shared_folder_name> <mount_point>
+
+# Rails and javascript install
+gem install rails --version=4.0.0 --no-ri --no-rdoc
+gem install execjs
+emerge net-libs/nodejs
+eselect bashcomp enable rake
 
 # OpenShift install
 cd ~
