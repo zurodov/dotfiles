@@ -38,7 +38,7 @@ zstyle ':completion:*:hosts' hosts $hosts
 TNS_ADMIN=~/.oracle
 export TNS_ADMIN
 
-export GEM_HOME=~/.gem/ruby/1.9.1
-export GEM_PATH=$GEM_HOME:/usr/lib/ruby/gems/1.9.1
+export GEM_HOME=~/.gem/ruby/2.0.0
+export GEM_PATH=$GEM_HOME:/usr/lib/ruby/gems/2.0.0
 export PATH=$GEM_HOME/bin:$PATH
 
