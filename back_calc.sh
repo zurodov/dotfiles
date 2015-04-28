@@ -9,7 +9,7 @@ BACK="/var/calculate/backup"
 tar uvf $BACK/cldx-${BUILD}.tar /etc --exclude /etc/splash
 tar uvf $BACK/cldx-${BUILD}.tar /var/lib/portage/world
 tar uvf $BACK/cldx-${BUILD}.tar /var/calculate/templates
-tar uvf $BACK/cldx-${BUILD}.tar /usr/src/linux/.confi*
+tar uvf $BACK/cldx-${BUILD}.tar /boot/config*
 tar uvf $BACK/cldx-${BUILD}.tar /root/.bash_history
 tar uvf $BACK/cldx-${BUILD}.tar /home/zur/.bash_history
 tar uvf $BACK/cldx-${BUILD}.tar /home/zur/.zsh_history
