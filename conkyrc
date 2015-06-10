@@ -74,12 +74,10 @@ ${color black}Timeleft: $color${apcupsd_timeleft}min ${color black}${alignr}Temp
 ${color black}File systems: $hr
 $color/ ${fs_size /}${alignr}free:${fs_free /}
 ${fs_bar 4 /}
+/var/calculate $color${fs_size /var/calculate}${alignr}free:${fs_free /var/calculate}
+${fs_bar 4 /var/calculate}
 /my $color${fs_size /my}${alignr}free:${fs_free /my}
 ${fs_bar 4 /my}
-/inst $color${fs_size /var/calculate/inst}${alignr}free:${fs_free /var/calculate/inst}
-${fs_bar 4 /var/calculate/inst}
-/back $color${fs_size /var/calculate/backup}${alignr}free:${fs_free /var/calculate/backup}
-${fs_bar 4 /var/calculate/backup}
 ${color black}Networking: $hr
 ppp0${alignr} ${addr ppp0}
 Up ${upspeed ppp0}${alignr}Down ${downspeed ppp0}
