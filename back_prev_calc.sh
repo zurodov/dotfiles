@@ -4,7 +4,7 @@
 cd /mnt
 
 BUILD=`grep "os_linux_build" ./etc/calculate/calculate.env | cut -f3 -d " "`
-BACK="/var/calculate/backup"
+BACK="/my/backup"
 
 tar uvf $BACK/cldx-${BUILD}.tar ./etc --exclude ./etc/splash
 tar uvf $BACK/cldx-${BUILD}.tar ./var/lib/portage/world
@@ -17,6 +17,8 @@ tar uvf $BACK/cldx-${BUILD}.tar ./root/.ssh
 tar uvf $BACK/cldx-${BUILD}.tar ./root/.config/mc
 
 gdisk -l /dev/sda >> /tmp/${BUILD}_part.lst
+echo ""   >> /tmp/${BUILD}_part.lst
+gdisk -l /dev/sdb >> /tmp/${BUILD}_part.lst
 echo ""   >> /tmp/${BUILD}_part.lst
 df -h     >> /tmp/${BUILD}_part.lst
 echo ""   >> /tmp/${BUILD}_part.lst
