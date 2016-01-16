@@ -6,43 +6,44 @@ set nocompatible    " We don't want vi compatibility.
 
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-"" github plugins
-Bundle 'gmarik/vundle'
-Bundle 'bling/vim-airline'
-Bundle 'talek/vorax4'
-Bundle 'ervandew/supertab'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vimwiki/vimwiki'
-Bundle 'vim-scripts/bash-support.vim'
-"" vim site plugins
-Bundle 'L9'
-Bundle 'tlib'
-Bundle 'xptemplate'
-Bundle 'earendel'
-Bundle 'Align'
-Bundle 'SQLUtilities'
-Bundle 'bufexplorer.zip'
+" github plugins
+Plugin 'VundleVim/Vundle.vim'                                                  
+Plugin 'bling/vim-airline'
+Plugin 'talek/vorax4'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vimwiki/vimwiki'
+Plugin 'vim-scripts/bash-support.vim'
+" vim site plugins
+Plugin 'L9'
+Plugin 'tlib'
+Plugin 'xptemplate'
+Plugin 'earendel'
+Plugin 'Align'
+Plugin 'SQLUtilities'
+Plugin 'bufexplorer.zip'
 ""Bundle 'minibufexplorerpp'
+Plugin 'ZoomWin'
 
 Plugin 'SirVer/ultisnips'                                                    
 Plugin 'honza/vim-snippets'                                                   
 Plugin 'Rip-Rip/clang_complete'
 
-" Zoomwin
-Bundle "ZoomWin"
-noremap <LocalLeader>o :ZoomWin<CR>
-vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
-inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
-noremap <C-W>+o :ZoomWin<CR>
+" ZoomWin plugin cfg
+""noremap <LocalLeader>o :ZoomWin<CR>
+""vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
+""inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
+""noremap <C-W>+o :ZoomWin<CR>
 
+call vundle#end()         " required
 filetype plugin indent on " завершение настроек Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Общие настройки                       #main "
@@ -110,10 +111,10 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Set a more convinient map leader
+" Set a more convinient map leader
 let mapleader=','
 
-"" Fast exit from insert mode by pressing jk simultaneously
+" Fast exit from insert mode by pressing jk simultaneously
 inoremap jj <Esc>
 
 " Fast saving
@@ -128,17 +129,17 @@ set noea
 " Set a faster tty
 set ttyfast
 
-"" Always show current position
+" Always show current position
 set ruler
 
-"" Set numbering
+" Set numbering
 set number
 
-"" Long lines
+" Long lines
 set textwidth=80
 set colorcolumn=+1
 
-"" Command bar height
+" Command bar height
 set cmdheight=1
 
 " Change buffer without saving
@@ -215,7 +216,7 @@ map <C-Right> <C-W>>
 map <leader>b :bnext<cr>
 map <C-S-Tab> :bprevious<cr>
 
-"" BufExplorer mappings
+" BufExplorer mappings
 nmap <F5> <Esc>:BufExplorer<cr>
 vmap <F5> <esc>:BufExplorer<cr>
 imap <F5> <esc>:BufExplorer<cr>
@@ -224,7 +225,7 @@ imap <F5> <esc>:BufExplorer<cr>
 nmap <F6> :bp<cr>
 vmap <F6> <esc>:bp<cr>i
 imap <F6> <esc>:bp<cr>i
-"
+
 " F7 - следующий буфер
 nmap <F7> :bn<cr>
 vmap <F7> <esc>:bn<cr>i
@@ -238,18 +239,18 @@ set laststatus=2
 
 set ttimeoutlen=50        " airline speed-up hack
 
-"" Format the statusline
+" Format the statusline
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 
 " Abreviation for inserting the current timestamp at the cursor position
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
-"" Supertab tweaks
+" Supertab tweaks
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 set completeopt+=longest
 let g:SuperTabLongestEnhanced=1
 
-"" NERDTree configuration
+" NERDTree configuration
 let g:NERDTreeHighlightCursorline = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = "right"
@@ -259,31 +260,31 @@ map <leader>ff :NERDTreeToggle<CR>
 let NERDTreeMapJumpPrevSibling = ''
 let NERDTreeMapHelp = 'H'
 
-"" avoid key conflict
+" avoid key conflict
 let g:SuperTabMappingForward = '<Plug>supertabKey'
 
-"" if nothing matched in xpt, try supertab
+" if nothing matched in xpt, try supertab
 let g:xptemplate_fallback = '<Plug>supertabKey'
 
-"" xpt uses <Tab> as trigger key
+" xpt uses <Tab> as trigger key
 let g:xptemplate_key = '<Tab>'
 
-"" use <tab>/<S-tab> to navigate through pum. Optional
+" use <tab>/<S-tab> to navigate through pum. Optional
 let g:xptemplate_pum_tab_nav = 1
 
-"" xpt triggers only when you typed whole name of a snippet. Optional
+" xpt triggers only when you typed whole name of a snippet. Optional
 let g:xptemplate_minimal_prefix = 'full'
 
-"" Navigate through xptemplate placeholders
+" Navigate through xptemplate placeholders
 let g:xptemplate_nav_next = '>>'
 let g:xptemplate_nav_prev = '<<'
 
-"" Don't like blanks for brackets
+" Don't like blanks for brackets
 let g:xptemplate_brace_complete = ''
 let g:xptemplate_vars = "SParg="
 
 " Taglist configuration
-let Tlist_Auto_Update=1 
+let Tlist_Auto_Update=1
 let Tlist_Show_One_File = 1
 nmap <silent> <leader>tt :TlistToggle<cr>
 
@@ -311,19 +312,19 @@ let g:vorax_key_for_toggle_logging = "<Leader>l"
 
 " Nice notification for my monitored long runinng queries
 function VoraxNotification()
-  let cmd = "notify-send -i 'terminal' 'VoraX' 'Execution of your monitored statement on ". 
-    \ &titlestring . " has just finished.'" 
+  let cmd = "notify-send -i 'terminal' 'VoraX' 'Execution of your monitored statement on ".
+    \ &titlestring . " has just finished.'"
   exe 'silent! !' . cmd
 endfunction
 let g:vorax_notify_command = "call VoraxNotification()"
 
 " set visualedit for results window
 au WinEnter vorax-results set ve=all
-au WinLeave vorax-results set ve= 
+au WinLeave vorax-results set ve=
 
 " Define mapping for invoking Command-T
 nmap <unique> <silent> <leader>f/ :CommandT<CR>
-let g:CommandTAcceptSelectionSplitMap='<C-w>' 
+let g:CommandTAcceptSelectionSplitMap='<C-w>'
 
 " More items in the fuzzy search list
 let g:fuf_enumeratingLimit = 300
@@ -343,15 +344,15 @@ nnoremap <leader>m :ShowMarksOnce<CR>
 
 " Matching brackets with blink
 set showmatch
-hi MatchParen cterm=none ctermbg=254 ctermfg=red 
+hi MatchParen cterm=none ctermbg=254 ctermfg=red
 
 " Configure bufferlist
 ""noremap <silent> <leader>b :TSelectBuffer<cr>
-""inoremap <silent> <leader>b :TSelectBuffer<cr> 
+""inoremap <silent> <leader>b :TSelectBuffer<cr>
 ""let g:tselectbuffer#autopick=0
 
 " A convenient map for zoom-in/zoom-out window
-""""nnoremap <silent> <Leader><Space> :ZoomWin<CR>
+"""""nnoremap <silent> <Leader><Space> :ZoomWin<CR>
 
 " Execute a file which has a shebang
 function! RunShebang()
@@ -392,46 +393,46 @@ map <F9> :call RunShebang()<CR>
 " figitive integration
   let g:airline#extensions#branch#enabled = 1
 
-" Let me choose the statusbar  
-let g:vorax_output_force_overwrite_status_line = 0  
-   
-function! VoraxOutputFlags()  
-  let funnel = ["", "VERTICAL", "PAGEZIP","TABLEZIP"][vorax#output#GetFunnel()]  
-  let append = g:vorax_output_window_append ? "APPEND" : ""  
-  let sticky = g:vorax_output_window_sticky_cursor ? "STICKY" : ""  
-  let heading = g:vorax_output_full_heading ? "HEADING" : ""  
-  let top = g:vorax_output_cursor_on_top ? "TOP" : ""  
-      return join(filter([funnel, append, sticky, heading, top], 'v:val != ""'), ' ')  
-endfunction  
-        
-function! VoraxAirPlugin(...)  
-  let session = '%{vorax#sqlplus#SessionOwner()}'  
-  let txn = '%{vorax#utils#IsOpenTxn() ? "!" . g:vorax_output_txn_marker : ""}'  
-    if vorax#utils#IsVoraxBuffer()  
-      let w:airline_section_b = get(w:, 'airline_section_b', g:airline_section_b) . session  
-      let w:airline_section_warning = get(w:, 'airline_section_warning', g:airline_section_warning) . txn  
-    endif  
-    if &ft == 'outputvorax'  
-      let lrows = '%{exists("g:vorax_limit_rows") ? " [LIMIT ROWS <=" . g:vorax_limit_rows . "] " : ""}'  
-      let w:airline_section_a = '%{vorax#utils#Throbber()}'  
-      let w:airline_section_b = airline#section#create_left([session])  
-      let w:airline_section_c = 'Output window'  
-      let w:airline_section_x = ''  
-      let w:airline_section_y = g:airline_section_z  
-      let w:airline_section_z = airline#section#create(["%{VoraxOutputFlags()}"])  
-      let w:airline_section_warning = get(w:, 'airline_section_warning', g:airline_section_warning)  
-      let w:airline_section_warning .= airline#section#create([lrows, txn])  
-    elseif (&ft == 'connvorax') || (&ft == 'explorervorax') || (&ft == 'oradocvorax')  
-      let w:airline_section_a = ''  
-      let w:airline_section_b = ''  
-      let w:airline_section_c = (&ft == 'connvorax' ? 'Connection Profiles' : &ft == 'explorervorax' ? 'DB Explorer' : 'Oracle Documentation')  
-      let w:airline_section_x = ''  
-      let w:airline_section_y = ''  
-      let w:airline_section_z = ''  
-    endif  
-endfunction  
-call airline#add_statusline_func('VoraxAirPlugin')  
-                                                                                               
-" Let the statusbar as it is for inactive windows  
+" Let me choose the statusbar
+let g:vorax_output_force_overwrite_status_line = 0
+
+function! VoraxOutputFlags()
+  let funnel = ["", "VERTICAL", "PAGEZIP","TABLEZIP"][vorax#output#GetFunnel()]
+  let append = g:vorax_output_window_append ? "APPEND" : ""
+  let sticky = g:vorax_output_window_sticky_cursor ? "STICKY" : ""
+  let heading = g:vorax_output_full_heading ? "HEADING" : ""
+  let top = g:vorax_output_cursor_on_top ? "TOP" : ""
+      return join(filter([funnel, append, sticky, heading, top], 'v:val != ""'), ' ')
+endfunction
+
+function! VoraxAirPlugin(...)
+  let session = '%{vorax#sqlplus#SessionOwner()}'
+  let txn = '%{vorax#utils#IsOpenTxn() ? "!" . g:vorax_output_txn_marker : ""}'
+    if vorax#utils#IsVoraxBuffer()
+      let w:airline_section_b = get(w:, 'airline_section_b', g:airline_section_b) . session
+      let w:airline_section_warning = get(w:, 'airline_section_warning', g:airline_section_warning) . txn
+    endif
+    if &ft == 'outputvorax'
+      let lrows = '%{exists("g:vorax_limit_rows") ? " [LIMIT ROWS <=" . g:vorax_limit_rows . "] " : ""}'
+      let w:airline_section_a = '%{vorax#utils#Throbber()}'
+      let w:airline_section_b = airline#section#create_left([session])
+      let w:airline_section_c = 'Output window'
+      let w:airline_section_x = ''
+      let w:airline_section_y = g:airline_section_z
+      let w:airline_section_z = airline#section#create(["%{VoraxOutputFlags()}"])
+      let w:airline_section_warning = get(w:, 'airline_section_warning', g:airline_section_warning)
+      let w:airline_section_warning .= airline#section#create([lrows, txn])
+    elseif (&ft == 'connvorax') || (&ft == 'explorervorax') || (&ft == 'oradocvorax')
+      let w:airline_section_a = ''
+      let w:airline_section_b = ''
+      let w:airline_section_c = (&ft == 'connvorax' ? 'Connection Profiles' : &ft == 'explorervorax' ? 'DB Explorer' : 'Oracle Documentation')
+      let w:airline_section_x = ''
+      let w:airline_section_y = ''
+      let w:airline_section_z = ''
+    endif
+endfunction
+call airline#add_statusline_func('VoraxAirPlugin')
+
+" Let the statusbar as it is for inactive windows
 let g:airline_inactive_collapse=0
 
