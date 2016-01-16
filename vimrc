@@ -2,40 +2,42 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Менеджер плагинов                    #vundle "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 set nocompatible    " We don't want vi compatibility.
 
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " github plugins
-Plugin 'VundleVim/Vundle.vim'                                                  
-Plugin 'bling/vim-airline'
-Plugin 'talek/vorax4'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vimwiki/vimwiki'
-Plugin 'vim-scripts/bash-support.vim'
+Plug 'bling/vim-airline'
+Plug 'talek/vorax4'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'vimwiki/vimwiki'
+Plug 'vim-scripts/bash-support.vim'
 " vim site plugins
-Plugin 'L9'
-Plugin 'tlib'
-Plugin 'xptemplate'
-Plugin 'earendel'
-Plugin 'Align'
-Plugin 'SQLUtilities'
-Plugin 'bufexplorer.zip'
+Plug 'L9'
+Plug 'tlib'
+Plug 'xptemplate'
+Plug 'earendel'
+Plug 'Align'
+Plug 'SQLUtilities'
+Plug 'bufexplorer.zip'
 ""Bundle 'minibufexplorerpp'
-Plugin 'ZoomWin'
+Plug 'ZoomWin'
 
-Plugin 'SirVer/ultisnips'                                                    
-Plugin 'honza/vim-snippets'                                                   
-Plugin 'Rip-Rip/clang_complete'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Rip-Rip/clang_complete'
 
 " ZoomWin plugin cfg
 ""noremap <LocalLeader>o :ZoomWin<CR>
@@ -43,7 +45,8 @@ Plugin 'Rip-Rip/clang_complete'
 ""inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
 ""noremap <C-W>+o :ZoomWin<CR>
 
-call vundle#end()         " required
+call plug#end()
+
 filetype plugin indent on " завершение настроек Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Общие настройки                       #main "
@@ -51,10 +54,10 @@ filetype plugin indent on " завершение настроек Vundle
 filetype plugin on      " Automatically detect file types.
 filetype indent on
 
-set exrc                                                                     
+set exrc
 " Запретим опасные команды в локальных .vimrc файлах (эта опция должна идти в
 " вашем ~/.vimrc после запрещаемых команд, таких как write)
-set secure 
+set secure
 
 augroup myvimrc     " autoreload .vimrc
     au!
@@ -435,4 +438,27 @@ call airline#add_statusline_func('VoraxAirPlugin')
 
 " Let the statusbar as it is for inactive windows
 let g:airline_inactive_collapse=0
+
+""augroup project
+""   autocmd!
+""   autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
+""augroup END
+
+let &path.="src/include,/usr/include/AL,"
+
+" Если есть makefile - собираем makeом.
+" Иначе используем gcc для текущего файла.
+if filereadable("Makefile")
+   set makeprg=make
+else
+   set makeprg=gcc\ -Wall\ -o\ %<\ %
+endif
+
+" формат строки с ошибкой для gcc и sdcc, это нужно для errormarker
+let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
+
+nnoremap <F8> :make!<cr>
+" Compile programs using Makefile (and do not jump to first error)
+au FileType c,cc,h,s imap <C-c>m <Esc>:make!<CR>a
+au FileType c,cc,h,s nmap <C-c>m :make!<CR>
 
