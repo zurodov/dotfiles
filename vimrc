@@ -1,14 +1,10 @@
+set nocompatible    " We don't want vi compatibility.
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            Менеджер плагинов                    #vundle "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off        " required for Vundle
+
 if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
-
-set nocompatible    " We don't want vi compatibility.
-
-filetype off
 
 call plug#begin('~/.vim/plugged')
 
@@ -59,10 +55,10 @@ set exrc
 " вашем ~/.vimrc после запрещаемых команд, таких как write)
 set secure
 
-augroup myvimrc     " autoreload .vimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
-augroup END
+""augroup myvimrc     " autoreload .vimrc
+""    au!
+""    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
+""augroup END
 
 let s:us_portable = 1 " не использовать зависимостей
 
@@ -443,7 +439,70 @@ let g:airline_inactive_collapse=0
 ""   autocmd!
 ""   autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
 ""augroup END
+"
+" ========================================================
+"
+" С/C++ файлы
+" Расставлять отступы в стиле С
+autocmd filetype c,cpp set cin
 
+" make-файлы
+" В make-файлах нам не нужно заменять табуляцию пробелами
+autocmd filetype make set noexpandtab
+autocmd filetype make set nocin
+
+" html-файлы
+" Не расставлять отступы в стиле С в html файлах
+autocmd filetype html set noexpandtab
+autocmd filetype html set nocin
+autocmd filetype html set textwidth=160
+
+" css-файлы
+" Не расставлять отступы в стиле C и не заменять табуляцию пробелами
+autocmd filetype css set nocin
+autocmd filetype css set noexpandtab
+
+" python-файлы
+" Не расставлять отступы в стиле С
+autocmd filetype python set nocin
+
+"Clang-completer
+" Включить дополнительные подсказки (аргументы функций, шаблонов и т.д.)
+let g:clang_snippets=1
+" Использоать ultisnips для дополнительных подсказок (чтобы подсказки шаблонов
+" автогенерации были в выпадающих меню)
+let g:clang_snippets_engine = 'ultisnips'
+" Периодически проверять проект на ошибки
+let g:clang_periodic_quickfix=1
+" Open quickfix window on error
+let g:clang_complete_copen=1
+" Use vim 7.3 conceal feature to hide the snippet placeholders
+let g:clang_conceal_snippets=0
+" Подсвечивать ошибки
+let g:clang_hl_errors=1
+" Автоматически закрывать окно подсказок после выбора подсказки
+let g:clang_close_preview=1
+" По нажатию Ctrl+F проверить поект на ошибки
+map <c-f> :call g:ClangUpdateQuickFix()<cr>
+"
+" ======================================
+"
+" Snippets
+" Раскрыть шаблон
+let g:UltiSnipsExpandTrigger="<c-a>"
+" Отобразить список шаблонов
+let g:UltiSnipsListSnippets="<c-d>"
+" Идти вперед по шиблонам
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" Идти назад
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Разделять окно вертикально при редактировании
+let g:UltiSnipsEditSplit="vertical"
+" Версия Python (Нужно указать используемую в системе по-умолчанию)
+let g:UltiSnipsUsePythonVersion=2
+"
+" =======================================
+"
 let &path.="src/include,/usr/include/AL,"
 
 " Если есть makefile - собираем makeом.
