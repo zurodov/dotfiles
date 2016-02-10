@@ -15,6 +15,7 @@ Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'altercation/vim-colors-solarized'
+"Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -109,6 +110,7 @@ set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+"colorscheme jellybeans
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set a more convinient map leader
 let mapleader=','

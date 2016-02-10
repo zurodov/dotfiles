@@ -32,13 +32,17 @@ DISABLE_CORRECTION="true"
 ###[ -r /etc/ssh/ssh_known_hosts ] && _global_ssh_hosts=(${${${${(f)"$(</etc/ssh/ssh_known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _global_ssh_hosts=()
 ###[ -r ~/.ssh/known_hosts ] && _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
 ###[ -r /etc/hosts ] && : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(</etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}}} || _etc_hosts=()
-hosts=(  "$_global_ssh_hosts[@]"  "$_ssh_hosts[@]"  "$_etc_hosts[@]"  "$HOST"  localhost)
-zstyle ':completion:*:hosts' hosts $hosts
+####hosts=(  "$_global_ssh_hosts[@]"  "$_ssh_hosts[@]"  "$_etc_hosts[@]"  "$HOST"  localhost)
+####hosts=( niz64 g32t ir64 kr64 )
+####zstyle "*" hosts $hosts
+####bindkey -v
 
 TNS_ADMIN=~/.oracle
 export TNS_ADMIN
+TERM=xterm-256color
+export TERM
 
 export GEM_HOME=~/.gem/ruby/2.0.0
-export GEM_PATH=$GEM_HOME:/usr/lib/ruby/gems/2.0.0
+export GEM_PATH=$GEM_HOME:/usr/lib/ruby/gems/2.1.0
 export PATH=$GEM_HOME/bin:$PATH
 
