@@ -9,7 +9,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " github plugins
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'talek/vorax4'
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdtree'
@@ -353,7 +354,7 @@ hi MatchParen cterm=none ctermbg=254 ctermfg=red
 ""let g:tselectbuffer#autopick=0
 
 " A convenient map for zoom-in/zoom-out window
-"""""nnoremap <silent> <Leader><Space> :ZoomWin<CR>
+nnoremap <silent> <Leader><Space> :ZoomWin<CR>
 
 " Execute a file which has a shebang
 function! RunShebang()
@@ -437,11 +438,11 @@ call airline#add_statusline_func('VoraxAirPlugin')
 " Let the statusbar as it is for inactive windows
 let g:airline_inactive_collapse=0
 
-""augroup project
-""   autocmd!
-""   autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
-""augroup END
-"
+augroup project
+   autocmd!
+   autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
+augroup END
+
 " ========================================================
 "
 " С/C++ файлы
