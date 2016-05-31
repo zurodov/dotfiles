@@ -20,5 +20,5 @@
 ###set -o nounset                              # Treat unset variables as an error
 
 killall conky
-/usr/bin/sleep 20 && /usr/bin/conky &
+/usr/bin/sleep 20 && /usr/bin/conky -d &
 

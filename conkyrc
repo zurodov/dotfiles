@@ -36,6 +36,7 @@ draw_outline no
 draw_shades no
 use_xft yes
 xftfont DejaVu Sans Mono:size=14
+xftalpha 1
 gap_x 150
 gap_y 20
 minimum_size 5 5
@@ -46,10 +47,12 @@ out_to_console no
 out_to_stderr no
 extra_newline no
 own_window yes
-own_window_class Conky
+# own_window_class Conky
 own_window_type desktop
+# own_window_type override
 own_window_transparent yes
 own_window_argb_visual yes
+own_window_argb_value 255
 stippled_borders 0
 update_interval 1.0
 uppercase no
@@ -65,9 +68,11 @@ ${color black}Uptime:$color $uptime${color black} - Load:$color $loadavg
 ${color black}Frequency (in GHz):$color $freq_g
 ${color black}RAM:$color $mem/$memmax - $memperc% ${membar 4}
 ${color black}Swap:$color $swap/$swapmax - $swapperc% ${swapbar 4}
-${color black}CPU1:$color ${cpu cpu1}% ${cpubar 4}
-${color black}CPU2:$color ${cpu cpu2}% ${cpubar 4}
-${color black}Processes:$color $processes  ${color grey}Running:$color $running_processes
+${color black}CPU:$color ${cpu cpu0}% ${color black}${alignr}${cpugraph cpu0 20,340}
+${color black}CPU1:$color ${cpu cpu1}% ${alignr}${cpubar cpu1 4,340}
+${color black}CPU2:$color ${cpu cpu2}% ${alignr}${cpubar cpu2 4,340}
+${color black}CPU3:$color ${cpu cpu3}% ${alignr}${cpubar cpu3 4,340}
+${color black}CPU4:$color ${cpu cpu4}% ${alignr}${cpubar cpu4 4,340}
 ${color black}APC UPS $hr
 ${apcupsd localhost 3551}Charge: ${color}$apcupsd_charge% ${color black}${alignr}Load: ${color}${apcupsd_load}%
 ${color black}Timeleft: $color${apcupsd_timeleft}min ${color black}${alignr}Temp: $color${apcupsd_temp}°C
@@ -83,6 +88,7 @@ ppp0${alignr} ${addr ppp0}
 Up ${upspeed ppp0}${alignr}Down ${downspeed ppp0}
 ${upspeedgraph ppp0 32, 130}${alignr}${downspeedgraph ppp0 32, 130}
 total ${totalup ppp0}${alignr}total ${totaldown ppp0}
+${color black}Processes:$color $processes  ${color grey}Running:$color $running_processes
 ${color black}TOP Processes $hr
 ${color black}Name    ${alignr}        PID     CPU%   MEM%
 ${color}${top name 1} ${alignr} ${top pid 1} ${top cpu 1} ${top mem 1}
