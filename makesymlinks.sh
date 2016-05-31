@@ -19,16 +19,16 @@ fi
 function install_zsh {
 # Test to see if zshell is installed.  If it is:
 if [ -f /bin/zsh ]; then
-	# Install oh-my-zsh from GitHub only if it isn't already present
-        if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
+# Install oh-my-zsh from GitHub only if it isn't already present
+	if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
 	   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 	fi
-	# Set the default shell to zsh if it isn't currently set to zsh
+# Set the default shell to zsh if it isn't currently set to zsh
 	if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
 	   chsh -s $(which zsh)
 	fi
 else
-        # If zsh isn't installed, emerge it
+# If zsh isn't installed, emerge it
         sudo -i emerge gentoo-zsh-completion
         install_zsh
 fi
@@ -43,7 +43,9 @@ cd $dir
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $dir/old"
-    mv ~/.$file $dir/old/
+    if [[ -f ~/.$file ]]; then
+       mv ~/.$file $dir/old/
+    fi
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
