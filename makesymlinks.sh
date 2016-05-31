@@ -29,7 +29,7 @@ if [ -f /bin/zsh ]; then
 	fi
 else
         # If zsh isn't installed, emerge it
-        sudo -i emerge zsh-completion
+        sudo -i emerge gentoo-zsh-completion
         install_zsh
 fi
 }
@@ -38,8 +38,6 @@ install_zsh
 
 # add custom oh_my_zsh config
 ln -s $dir/00-zur.zsh ~/.oh-my-zsh/custom/00-zur.zsh
-# Vundle install
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 cd $dir
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
