@@ -1,7 +1,5 @@
 set nocompatible    " We don't want vi compatibility.
 
-filetype off        " required for Vundle
-
 if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
@@ -22,30 +20,30 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/bash-support.vim'
-" vim site plugins
-Plug 'L9'
-Plug 'tlib'
-Plug 'xptemplate'
-Plug 'earendel'
-Plug 'Align'
-Plug 'SQLUtilities'
-Plug 'bufexplorer.zip'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/tlib'
+Plug 'vim-scripts/xptemplate'
+Plug 'vim-scripts/earendel'
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/SQLUtilities'
+Plug 'vim-scripts/bufexplorer.zip'
 ""Bundle 'minibufexplorerpp'
-Plug 'ZoomWin'
-
+Plug 'vim-scripts/ZoomWin'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Rip-Rip/clang_complete'
 
-" ZoomWin plugin cfg
-""noremap <LocalLeader>o :ZoomWin<CR>
-""vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
-""inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
-""noremap <C-W>+o :ZoomWin<CR>
+"" experimental                                                                  
+Plug 'tpope/vim-eunuch'      "" SudoWrite                                           
+Plug 'Shougo/vimproc.vim'                                                           
+Plug 'Shougo/unite.vim'
+Plug 'chrisbra/vim-diff-enhanced'
+""   pw mgmt
+Plug 'jamessan/vim-gnupg'
+"" Fuzzy search in VIM  
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
-
-filetype plugin indent on " завершение настроек Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Общие настройки                       #main "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -312,6 +310,8 @@ let g:vorax_key_for_fuzzy_search = "??"
 let g:vorax_key_for_goto_def = "gd"
 let g:vorax_key_for_toggle_logging = "<Leader>l"
 
+let g:vorax_output_window_statusline = 1
+
 " Nice notification for my monitored long runinng queries
 function VoraxNotification()
   let cmd = "notify-send -i 'terminal' 'VoraX' 'Execution of your monitored statement on ".
@@ -354,6 +354,11 @@ hi MatchParen cterm=none ctermbg=254 ctermfg=red
 ""let g:tselectbuffer#autopick=0
 
 " A convenient map for zoom-in/zoom-out window
+" ZoomWin plugin cfg
+""noremap <LocalLeader>o :ZoomWin<CR>
+""vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
+""inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
+""noremap <C-W>+o :ZoomWin<CR>
 nnoremap <silent> <Leader><Space> :ZoomWin<CR>
 
 " Execute a file which has a shebang
@@ -501,8 +506,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Разделять окно вертикально при редактировании
 let g:UltiSnipsEditSplit="vertical"
-" Версия Python (Нужно указать используемую в системе по-умолчанию)
-let g:UltiSnipsUsePythonVersion=2
 "
 " =======================================
 "
@@ -524,3 +527,80 @@ nnoremap <F8> :make!<cr>
 au FileType c,cc,h,s imap <C-c>m <Esc>:make!<CR>a
 au FileType c,cc,h,s nmap <C-c>m :make!<CR>
 
+"" Unite setup                                                                   
+" Автоматический insert mode                                                     
+let g:unite_enable_start_insert = 1                                              
+                                                                                 
+" Отображаем Unite в нижней части экрана                                         
+let g:unite_split_rule = "botright"                                              
+                                                                                 
+" Отключаем замену статус строки                                                 
+let g:unite_force_overwrite_statusline = 0                                       
+                                                                                 
+" Размер окна Unite                                                              
+let g:unite_winheight = 10                                                       
+                                                                                 
+" Красивые стрелочки                                                             
+let g:unite_candidate_icon="▷"                                                   
+                                                                                 
+nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+
+"" Unite setup                                                                      
+" Автоматический insert mode                                                        
+let g:unite_enable_start_insert = 1                                                 
+                                                                                    
+" Отображаем Unite в нижней части экрана                                            
+let g:unite_split_rule = "botright"                                                 
+                                                                                    
+" Отключаем замену статус строки                                                    
+let g:unite_force_overwrite_statusline = 0                                          
+                                                                                    
+" Размер окна Unite                                                                 
+let g:unite_winheight = 10                                                          
+                                                                                    
+" Красивые стрелочки                                                                
+let g:unite_candidate_icon="▷"                                                      
+                                                                                    
+nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+
+" GnuPG Extensions "
+
+" Tell the GnuPG plugin to armor new files.
+let g:GPGPreferArmor=1
+
+" Tell the GnuPG plugin to sign new files.
+let g:GPGPreferSign=1
+
+augroup GnuPGExtra
+" Set extra file options.
+    autocmd BufReadCmd,FileReadCmd *.\(gpg\|asc\|pgp\) call SetGPGOptions()
+" Automatically close unmodified files after inactivity.
+""""""""    autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+augroup END
+
+function SetGPGOptions()
+" Set updatetime to 1 minute.
+    set updatetime=60000
+" Fold at markers.
+    set foldmethod=marker
+" Automatically close all folds.
+    set foldclose=all
+" Only open folds with insert commands.
+    set foldopen=insert
+endfunction
+
+" Yank WORD to system clipboard in normal mode
+nmap <leader>y "+yE
+
+" Yank selection to system clipboard in visual mode
+vmap <leader>y "+y
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" My FZF setup
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
