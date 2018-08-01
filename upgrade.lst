@@ -45,7 +45,7 @@ sh makesymlinks.sh
 # Vorax IDE install
 emerge dev-db/oracle-instantclient-sqlplus
 vi ~/.oracle/tnsnames.ora
-gem install vorax -r
+gem install vorax --no-rdoc --no-ri
 vi
 BundleInstall
 http://www.oracle.com/technetwork/database/enterprise-edition/documentation/database-093888.html
